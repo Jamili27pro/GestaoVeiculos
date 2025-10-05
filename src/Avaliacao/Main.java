@@ -7,7 +7,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         boolean continuar = true;
 
-
         while (continuar) {
             System.out.println("\n+--- Cadastramento de veículos ---");
             System.out.println("1 - Carro");
@@ -15,8 +14,7 @@ public class Main {
             System.out.println("3 - Caminhão");
             System.out.println("Escolha uma opção: ");
             int opcao = sc.nextInt();
-
-            sc.nextLine();
+            sc.nextLine(); 
 
             System.out.println("Informe a placa do veículo:");
             String placa = sc.nextLine();
@@ -26,7 +24,6 @@ public class Main {
 
             System.out.println("Informe o preço do veículo:");
             double preco = sc.nextDouble();
-
             sc.nextLine();
 
             Veiculo veiculo = null;
@@ -40,34 +37,43 @@ public class Main {
                 int cilindradas = sc.nextInt();
                 sc.nextLine();
                 veiculo = new Moto(placa, marca, preco, cilindradas);
-            }else if (opcao == 3) {
+            } else if (opcao == 3) {
                 System.out.println("Capacidade de carga: ");
                 int capacidade = sc.nextInt();
                 sc.nextLine();
                 veiculo = new Caminhao(placa, marca, preco, capacidade);
-            }else {
+            } else {
                 System.out.println("Opção inválida, tente novamente!");
                 continue;
             }
 
-            System.out.println("\n--- Dados do Veículo ---");
-            veiculo.mostrarDados();
+            // Parte que pergunta sobre o desconto
+            System.out.println("\nDeseja aplicar desconto? (sim/não)");
+            String aplicarDesconto = sc.nextLine();
 
+            if (aplicarDesconto.equalsIgnoreCase("sim")) {
+                System.out.println("Informe o percentual de desconto:");
+                double desconto = sc.nextDouble();
+                sc.nextLine();
+
+                veiculo.mostrarDados(desconto);
+            } else {
+                System.out.println("\n--- Dados do Veículo ---");
+                veiculo.mostrarDados();
+            }
 
             System.out.println("\nDeseja cadastrar outro veículo? (sim/não)");
             String resposta = sc.nextLine();
             if (resposta.equalsIgnoreCase("não")) {
                 continuar = false;
             }
-
         }
-        System.out.println("\nPrograma encerrado.");
+
+        System.out.println("\nFim do programa.");
         sc.close();
     }
-
-
-
 }
+
 
 
 
